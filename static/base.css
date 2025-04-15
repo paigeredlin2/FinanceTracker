@@ -1,0 +1,94 @@
+.index_body{
+    padding: 2rem 0;
+    margin: 4rem;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 12px;
+}
+.nav_content{
+    background-color: #198754;
+    border-bottom: 2px solid #06402B;
+}
+.nav_header_link{
+    text-decoration: none;
+    color: black;
+    margin-right: 2rem;
+}
+.auth_header{
+    text-align: center;
+}
+.auth_content{
+    margin: 4rem;
+}
+.auth_form{
+    border: 2px solid #06402B;
+    border-radius: 12px;
+    padding: 2rem;
+}
+.form_label{
+    font-size: larger;
+}
+.form_input{
+    display: block;
+    width: 100%;
+    margin: .5rem 0;
+    font-size: larger;
+    padding: .5rem;
+}
+.tracksheet_content{
+    margin: 4rem;
+}
+.tracksheet_header{
+    text-align: center;
+}
+.earn{
+    border: 2px solid black;
+}
+.earn_labels{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+}
+.earn_labels > .e_item{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+.expenses_container, .earnings_container{
+    margin-top: 1rem;
+    border-top: 5px solid #06402B;
+
+}
+.expense{
+    border: 2px solid black;
+}
+.expense_labels{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+}
+.expense_labels > .e_item{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+.e_item{
+    text-align: center;
+    margin: auto 0;
+}
+.e_green{
+    color: #048f2e;
+}
+.e_blue{
+    color: #06048f;
+}
+.e_red{
+    color: #8f0404;
+}
+.add_button{
+    margin: 2rem 0;
+}
+.money_buttons{
+    font-size: 14px;
+}
+.m_button{
+    margin: .25rem 0;
+}

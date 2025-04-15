@@ -41,8 +41,10 @@ def test_user_creation(page: Page):
 
 def test_user_creation_wrong(page: Page):
    page.goto(BASE_URL)
-   register_button = page.get_by_role("link", name="Register")
+   register_button = page.locator('button[id="index_register"]')
    register_button.click()
+
+   expect(page).to_have_url(f"{BASE_URL}/register")
 
    username = page.locator('input[id="username"]')
    expect(username).to_be_visible()
@@ -52,7 +54,7 @@ def test_user_creation_wrong(page: Page):
    expect(password).to_be_visible()
    password.fill("PASSWORD")
 
-   confirm_password = page.locator('input[id="confirm_password"]')
+   confirm_password = page.get_by_label("Confirm Password:")
    expect(confirm_password).to_be_visible()
    confirm_password.fill("WRONGPASSWORD")
 
@@ -73,7 +75,7 @@ def test_user_creation_wrong(page: Page):
 
 def test_login_success(page: Page):
    page.goto(BASE_URL)
-   login_button = page.get_by_role("link", name="Login")
+   login_button = page.locator('button[id="index_login"]')
    login_button.click()
 
    username = page.locator('input[id="username"]')
@@ -82,16 +84,16 @@ def test_login_success(page: Page):
    password = page.locator('input[id="password"]')
    password.fill("PASSWORD")
 
-   submit = page.locator('button[type="submit"]')
+   submit = page.locator('button.button_login')
    submit.click()
 
-   welcome = page.locator('h1:has-text("Welcome, TestAccount")')
-   expect(welcome).to_be_visible()
+   tracksheet = page.locator('div.tracksheet_content')
+   expect(tracksheet).to_be_visible()
 
 
 def test_login_incorrect(page: Page):
    page.goto(BASE_URL)
-   login_button = page.get_by_role("link", name="Login")
+   login_button = page.locator('button[id="index_login"]')
    login_button.click()
 
    username = page.locator('input[id="username"]')
@@ -100,9 +102,8 @@ def test_login_incorrect(page: Page):
    password = page.locator('input[id="password"]')
    password.fill("WRONGPASSWORD")
 
-   submit = page.locator('button[type="submit"]')
+   submit = page.locator('button.button_login')
    submit.click()
 
    flash_danger = page.locator('div.alert-danger')
    expect(flash_danger).to_be_visible()
-

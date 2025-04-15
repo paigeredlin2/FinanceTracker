@@ -1,64 +1,90 @@
 {% extends "base.html" %}
 {% include 'partials/_navbar.html' %}
 {% block body %}
-    <h1>Welcome, {{ user.username }}</h1>
-    <h1>Input your income and expenses.</h1>
+
+<div class="tracksheet_content">
+    <div class="tracksheet_header">
+        <h1>Hello, {{ user.username }}!</h1>
+        <h3>This is the tracksheet. Use the 'Add Earning' and 'Add Expense' buttons to help finance your budget.</h3>
+    </div>
     <div class="earnings_container">
+        <h1>Income:</h1>
         {% if earnings %}
+        <div class="row earn_labels">
+            <h3 class="col-sm e_item">Title</h3>
+            <h3 class="col-sm e_item">Occurrence</h3>
+            <h3 class="col-sm e_item">Amount</h3>
+            <h3 class="col-sm e_item">Tools</h3>
+        </div>
             {% for earn in earnings %}
-                <div class="earn">
-                    <h3>{{ earn.title }}</h3>
-                    <h4>{{ earn.occurrence }}</h4>
-                    <h4>{{ earn.amount }}</h4>
+                <div class="row earn">
+
+                        <h3 class="col-sm e_item">{{ earn.title }}</h3>
+                        <h3 class="col-sm e_item">{{ earn.occurrence }}</h3>
+                        <h3 class="col-sm e_item e_green">${{ earn.amount }}</h3>
+
+                        <div class="col-sm money_buttons e_item">
+                            <button class="btn btn-warning btn-sm m_button edit_earn"
+                                    onclick="openEditEarnModal({{ earn.id }}, '{{ earn.title }}', '{{ earn.occurrence }}', {{ earn.amount }})">
+                                    Edit
+                            </button>
+                            <form method="POST" class="d-inline m_button" action="{{ url_for('manage_earn', earn_id=earn.id) }}">
+                                <input type="hidden" name="action" value="delete">
+                                <button class="btn btn-danger btn-sm delete_earn" type="submit"
+                                 onclick="return confirm('Are you sure you want to delete this income?')">
+                                 Delete
+                               </button>
+                            </form>
+                        </div>
+
                 </div>
-                <div class="edit_button">
-                    <button class="btn btn-primary"
-                            onclick="openEditEarnModal({{ earn.id }}, '{{ earn.title }}', '{{ earn.occurrence }}', {{ earn.amount }})">
-                            Edit
-                    </button>
-                </div>
-                <form method="POST" action="{{ url_for('manage_earn', earn_id=earn.id) }}">
-                    <input type="hidden" name="action" value="delete">
-                    <button class="btn btn-outline-danger btn-sm" type="submit"
-                     onclick="return confirm('Are you sure you want to delete this income?')">
-                     Delete
-                   </button>
-                </form>
             {% endfor %}
         {% endif %}
         <div>
-             <button class="btn btn-success" onclick="openCreateEarnModal()">Add Earning</button>
+             <button id="add_earning" class="btn btn-primary add_button" onclick="openCreateEarnModal()">Add Earning</button>
         </div>
     </div>
 
     <div class="expenses_container">
+        <h1>Expenses:</h1>
         {% if expenses  %}
+            <div class="row expense_labels">
+                <h3 class="col-sm e_item">Title</h3>
+                <h3 class="col-sm e_item">Occurrence</h3>
+                <h3 class="col-sm e_item">Dedicated Amount</h3>
+                <h3 class="col-sm e_item">Spend Amount</h3>
+                <h3 class="col-sm e_item">Tools</h3>
+            </div>
             {% for expense in expenses %}
-                <div class="expense">
-                    <h3>{{ expense.title }}</h3>
-                    <h4>{{ expense.occurrence }}</h4>
-                    <h4>{{ expense.dedicated_amount }}</h4>
-                    <h4>{{ expense.actual_spend_amount }}</h4>
+                <div class="row expense">
+                        <h3 class="col-sm e_item">{{ expense.title }}</h3>
+                        <h3 class="col-sm e_item">{{ expense.occurrence }}</h3>
+                        <h3 class="col-sm e_item e_blue">${{ expense.dedicated_amount }}</h3>
+                        <h3 class="col-sm e_item e_red">${{ expense.actual_spend_amount }}</h3>
+
+                        <div class="col-sm money_buttons e_item">
+                            <button class="btn btn-warning btn-sm m_button edit_expense"
+                                onclick="openEditExpenseModal({{ expense.id }}, '{{ expense.title }}', '{{ expense.occurrence }}', {{ expense.dedicated_amount }}, {{ expense.actual_spend_amount }})">
+                                Edit
+                            </button>
+                            <form method="POST" class="d-inline m_button" action="{{ url_for('manage_expense', expense_id=expense.id) }}">
+                                <input type="hidden" name="action" value="delete">
+                                <button class="btn btn-danger btn-sm m_button delete_expense" type="submit"
+                                 onclick="return confirm('Are you sure you want to delete this expense?')">
+                                 Delete
+                               </button>
+                            </form>
+                        </div>
+
                 </div>
-                 <div class="edit_button">
-                        <button class="btn btn-primary"
-                            onclick="openEditExpenseModal({{ expense.id }}, '{{ expense.title }}', '{{ expense.occurrence }}', {{ expense.dedicated_amount }}, {{ expense.actual_spend_amount }})">
-                            Edit
-                        </button>
-                    </div>
-                    <form method="POST" action="{{ url_for('manage_expense', expense_id=expense.id) }}">
-                        <input type="hidden" name="action" value="delete">
-                        <button class="btn btn-outline-danger btn-sm" type="submit"
-                         onclick="return confirm('Are you sure you want to delete this expense?')">
-                         Delete
-                       </button>
-                    </form>
             {% endfor %}
         {% endif %}
         <div>
-            <button class="btn btn-success" onclick="openCreateExpenseModal()">Add Expense</button>
+            <button id="add_expense" class="btn btn-primary add_button" onclick="openCreateExpenseModal()">Add Expense</button>
         </div>
     </div>
+</div>
+
 
 
 <!-- Earnings Modal -->
@@ -97,11 +123,10 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button id="submit_earn" type="submit" class="btn btn-primary">Save</button>
                 </div>
         </form>
       </div>
-
   </div>
 </div>
 
@@ -124,10 +149,16 @@
             <input type="text" class="form-control" id="expenseTitle" name="title" required />
           </div>
 
-          <div class="mb-3">
-            <label for="expenseOccurrence" class="form-label">Occurrence</label>
-            <input type="text" class="form-control" id="expenseOccurrence" name="occurrence" required />
-          </div>
+          <div class="mb-3 form-group">
+                    <label for="expenseOccurrence">Occurrence</label>
+                    <select class="form-control" id="expenseOccurrence" name="occurrence">
+                      <option value="Weekly">Weekly</option>
+                      <option value="Bi-Weekly">Bi-Weekly</option>
+                      <option value="Monthly">Monthly</option>
+                      <option value="Yearly">Yearly</option>
+                      <option value="One-time">One-time</option>
+                    </select>
+                  </div>
 
           <div class="mb-3">
             <label for="dedicatedAmount" class="form-label">Dedicated Amount</label>
@@ -142,7 +173,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button id="submit_expense" type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
     </div>

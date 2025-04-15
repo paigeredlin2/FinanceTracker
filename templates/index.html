@@ -2,7 +2,11 @@
 {% include 'partials/_navbar.html' %}
 
 {% block body %}
-    <h1>Paige's Finance Tracker</h1>
-    <h1>Index</h1>
-    <p>Use anon</p>
-{% endblock %}
+    <div class="index_body">
+        <h1>Welcome!</h1>
+        <h2>Manage your budget in your browser.</h2>
+        <h2>Use anonymously, no need for your email and no need to use your name.</h2>
+        <button class="btn btn-primary index_button" id="index_register"><a class="link-light link-underline-opacity-0" href="{{ url_for('register') }}">Get Started</a></button>
+        <button class="btn btn-success index_button" id="index_login"><a class="link-light link-underline-opacity-0" href="{{ url_for('login') }}">Login</a></button>
+    </div>
+ {% endblock %}

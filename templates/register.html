@@ -1,43 +1,45 @@
 {% extends "base.html" %}
+{% include 'partials/_navbar.html' %}
 {% block body %}
-    <h1>Paige's Finance Tracker</h1>
-    <h1>Register!</h1>
-    <form method="POST">
-        <div class="input_group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required/>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required/>
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required/>
+
+    <div class="auth_content">
+        <div class="auth_header">
+            <h1>Create an account:</h1>
+            <h3>Already have an account? <button class="btn btn-success"><a class="link-light link-underline-opacity-0" href="{{ url_for('login') }}">Login</a></button></h3>
         </div>
-        <div class="security_questions_group">
-            <datalist id="questions">
-                <option>What's the name of your childhood pet?</option>
-                <option>What's the name of the elementary school you attended as a child?</option>
-                <option>What is your favorite season?</option>
-            </datalist>
+    <form method="POST" class="auth_form">
+            <div class="input_group">
+                <label class="form_label" for="username">Username:</label>
+                <input class="form_input" type="text" id="username" name="username" required/>
+                <label class="form_label" for="password">Password:</label>
+                <input class="form_input" type="password" id="password" name="password" required/>
+                <label class="form_label" for="confirm_password">Confirm Password:</label>
+                <input class="form_input" type="password" id="confirm_password" name="confirm_password" required/>
+            </div>
+            <div class="security_questions_group">
+                <datalist id="questions">
+                    <option>What's the name of your childhood pet?</option>
+                    <option>What's the name of the elementary school you attended as a child?</option>
+                    <option>What is your favorite season?</option>
+                </datalist>
 
-            <label for="security_question_one">Security Question One:</label>
-            <input type="text" list="questions" id="security_question_one" name="security_question_one"
-            placeholder="Choose a question or type your own" required/>
+                <label for="security_question_one">Security Question One:</label>
+                <input class="form_input" type="text" list="questions" id="security_question_one" name="security_question_one"
+                placeholder="Choose a question or type your own" required/>
 
-            <label for="security_answer_one">Answer to Security Question One:</label>
-            <input type="text" id="security_answer_one" name="security_answer_one" required>
+                <label for="security_answer_one">Answer to Security Question One:</label>
+                <input class="form_input" type="text" id="security_answer_one" name="security_answer_one" required>
 
-            <label for="security_question_two">Optional, Security Question Two:</label>
-            <input type="text" list="questions" id="security_question_two" name="security_question_two"
-            placeholder="Choose a question or type your own"/>
+                <label for="security_question_two">Optional, Security Question Two:</label>
+                <input class="form_input" type="text" list="questions" id="security_question_two" name="security_question_two"
+                placeholder="Choose a question or type your own"/>
 
-            <label for="security_answer_two">Answer to Security Question One:</label>
-            <input type="text" id="security_answer_two" name="security_answer_two" >
-
-        </div>
-        <button type="submit">Register</button>
-        <div>
-            <p>Already have an account?</p>
-            <button><a href="{{ url_for('login') }}">Login</a></button>
-        </div>
+                <label for="security_answer_two">Answer to Security Question One:</label>
+                <input class="form_input" type="text" id="security_answer_two" name="security_answer_two" >
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
     </form>
+    </div>
+
 
 {% endblock %}
