@@ -34,10 +34,12 @@ def create_app(enviro = "production"):
 
 app = create_app(environment)
 
-#routes
+#ROUTES
+#AUTH ROUTES
 @app.route('/')
 def index():
 	return render_template("index.html", user=current_user)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -71,7 +73,6 @@ def register():
 	return render_template("register.html", user=current_user)
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
@@ -85,6 +86,7 @@ def login():
 			flash("Invalid username or password", "danger")
 	return render_template("login.html", user=current_user)
 
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -92,6 +94,8 @@ def logout():
 	flash("Logged out successfully!", "info")
 	return redirect(url_for("login"))
 
+
+#BUDGET ROUTES
 @app.route('/tracksheet', methods=["GET", "POST"])
 @login_required
 def tracksheet():
@@ -100,6 +104,7 @@ def tracksheet():
 	                       expenses=current_user.expenses,
 	                       user=current_user
 	)
+
 
 @app.route("/earnings", methods=["POST"])
 @login_required
@@ -123,6 +128,7 @@ def create_earn():
 
 	flash("Income added!", "success")
 	return redirect(url_for("tracksheet"))
+
 
 @app.route("/manage_earn/<int:earn_id>", methods=["POST"])
 @login_required
@@ -189,6 +195,7 @@ def create_expense():
 
 	flash("Expense added!", "success")
 	return redirect(url_for("tracksheet"))
+
 
 @app.route("/manage_expense/<int:expense_id>", methods=["POST"])
 @login_required

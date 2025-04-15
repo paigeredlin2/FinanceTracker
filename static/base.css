@@ -41,34 +41,19 @@
 .tracksheet_header{
     text-align: center;
 }
-.earn{
+.earn, .expense{
     border: 2px solid black;
 }
-.earn_labels{
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+.earn_labels, .expense_labels{
     margin-bottom: 1rem;
-}
-.earn_labels > .e_item{
-    border-left: 2px solid black;
-    border-right: 2px solid black;
+    text-align: center;
 }
 .expenses_container, .earnings_container{
     margin-top: 1rem;
     border-top: 5px solid #06402B;
-
 }
-.expense{
+.e_label{
     border: 2px solid black;
-}
-.expense_labels{
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    margin-bottom: 1rem;
-}
-.expense_labels > .e_item{
-    border-left: 2px solid black;
-    border-right: 2px solid black;
 }
 .e_item{
     text-align: center;

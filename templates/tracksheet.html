@@ -11,19 +11,19 @@
         <h1>Income:</h1>
         {% if earnings %}
         <div class="row earn_labels">
-            <h3 class="col-sm e_item">Title</h3>
-            <h3 class="col-sm e_item">Occurrence</h3>
-            <h3 class="col-sm e_item">Amount</h3>
-            <h3 class="col-sm e_item">Tools</h3>
+            <h3 class="col-md e_label">Title</h3>
+            <h3 class="col-md e_label">Occurrence</h3>
+            <h3 class="col-md e_label">Amount</h3>
+            <h3 class="col-md e_label">Tools</h3>
         </div>
             {% for earn in earnings %}
                 <div class="row earn">
 
-                        <h3 class="col-sm e_item">{{ earn.title }}</h3>
-                        <h3 class="col-sm e_item">{{ earn.occurrence }}</h3>
-                        <h3 class="col-sm e_item e_green">${{ earn.amount }}</h3>
+                        <h3 class="col-md e_item">{{ earn.title }}</h3>
+                        <h3 class="col-md e_item">{{ earn.occurrence }}</h3>
+                        <h3 class="col-md e_item e_green">${{ earn.amount }}</h3>
 
-                        <div class="col-sm money_buttons e_item">
+                        <div class="col-md money_buttons e_item">
                             <button class="btn btn-warning btn-sm m_button edit_earn"
                                     onclick="openEditEarnModal({{ earn.id }}, '{{ earn.title }}', '{{ earn.occurrence }}', {{ earn.amount }})">
                                     Edit
@@ -49,20 +49,20 @@
         <h1>Expenses:</h1>
         {% if expenses  %}
             <div class="row expense_labels">
-                <h3 class="col-sm e_item">Title</h3>
-                <h3 class="col-sm e_item">Occurrence</h3>
-                <h3 class="col-sm e_item">Dedicated Amount</h3>
-                <h3 class="col-sm e_item">Spend Amount</h3>
-                <h3 class="col-sm e_item">Tools</h3>
+                <h3 class="col-md e_label">Title</h3>
+                <h3 class="col-md e_label">Occurrence</h3>
+                <h3 class="col-md e_label">Dedicated Amount</h3>
+                <h3 class="col-md e_label">Spend Amount</h3>
+                <h3 class="col-md e_label">Tools</h3>
             </div>
             {% for expense in expenses %}
                 <div class="row expense">
-                        <h3 class="col-sm e_item">{{ expense.title }}</h3>
-                        <h3 class="col-sm e_item">{{ expense.occurrence }}</h3>
-                        <h3 class="col-sm e_item e_blue">${{ expense.dedicated_amount }}</h3>
-                        <h3 class="col-sm e_item e_red">${{ expense.actual_spend_amount }}</h3>
+                        <h3 class="col-md e_item">{{ expense.title }}</h3>
+                        <h3 class="col-md e_item">{{ expense.occurrence }}</h3>
+                        <h3 class="col-md e_item e_blue">${{ expense.dedicated_amount }}</h3>
+                        <h3 class="col-md e_item e_red">${{ expense.actual_spend_amount }}</h3>
 
-                        <div class="col-sm money_buttons e_item">
+                        <div class="col-md money_buttons e_item">
                             <button class="btn btn-warning btn-sm m_button edit_expense"
                                 onclick="openEditExpenseModal({{ expense.id }}, '{{ expense.title }}', '{{ expense.occurrence }}', {{ expense.dedicated_amount }}, {{ expense.actual_spend_amount }})">
                                 Edit
